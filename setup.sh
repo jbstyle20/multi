@@ -4,7 +4,7 @@ biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 #########################
 
 BURIQ () {
-    curl -sS https://raw.githubusercontent.com/DryanZ/permission/aio/access > /root/tmp
+    curl -sS https://raw.githubusercontent.com/arismaramar/permission/aio/access > /root/tmp
     data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
     for user in "${data[@]}"
     do
@@ -20,9 +20,9 @@ BURIQ () {
     done
     rm -f  /root/tmp
 }
-# https://raw.githubusercontent.com/DryanZ/permission/aio/access 
+# https://raw.githubusercontent.com/arismaramar/permission/aio/access 
 MYIP=$(curl -sS ipv4.icanhazip.com)
-Name=$(curl -sS https://raw.githubusercontent.com/DryanZ/permission/aio/access | grep $MYIP | awk '{print $2}')
+Name=$(curl -sS https://raw.githubusercontent.com/arismaramar/permission/aio/access | grep $MYIP | awk '{print $2}')
 echo $Name > /usr/local/etc/.$Name.ini
 CekOne=$(cat /usr/local/etc/.$Name.ini)
 
@@ -39,7 +39,7 @@ fi
 
 PERMISSION () {
     MYIP=$(curl -sS ipv4.icanhazip.com)
-    IZIN=$(curl -sS https://raw.githubusercontent.com/DryanZ/permission/aio/access | awk '{print $4}' | grep $MYIP)
+    IZIN=$(curl -sS https://raw.githubusercontent.com/arismaramar/permission/aio/access | awk '{print $4}' | grep $MYIP)
     if [ "$MYIP" = "$IZIN" ]; then
     Bloman
     else
@@ -148,7 +148,7 @@ fi
 fi
 
 echo ""
-wget -q https://raw.githubusercontent.com/DryanZ/multi/aio/dependencies.sh;chmod +x dependencies.sh;./dependencies.sh
+wget -q https://raw.githubusercontent.com/arismaramar/multi/aio/dependencies.sh;chmod +x dependencies.sh;./dependencies.sh
 rm dependencies.sh
 clear
 
@@ -202,42 +202,42 @@ echo -e "${tyblue}|     PROCESS INSTALLED SSH & OPENVPN      |${NC}"
 echo -e "${tyblue}'------------------------------------------'${NC}"
 sleep 2
 clear
-wget https://raw.githubusercontent.com/DryanZ/multi/aio/ssh/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
+wget https://raw.githubusercontent.com/arismaramar/multi/aio/ssh/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
 #Install Xray
 echo -e "${tyblue}.------------------------------------------.${NC}"
 echo -e "${tyblue}|          PROCESS INSTALLED XRAY          |${NC}"
 echo -e "${tyblue}'------------------------------------------'${NC}"
 sleep 2
 clear
-wget https://raw.githubusercontent.com/DryanZ/multi/aio/xray/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
-wget https://raw.githubusercontent.com/DryanZ/multi/aioxtls/xtls.sh && chmod +x xtls.sh && ./xtls.sh
+wget https://raw.githubusercontent.com/arismaramar/multi/aio/xray/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
+wget https://raw.githubusercontent.com/arismaramar/multi/aioxtls/xtls.sh && chmod +x xtls.sh && ./xtls.sh
 #Set Backup
 echo -e "${tyblue}.------------------------------------------.${NC}"
 echo -e "${tyblue}|                SET BACKUP                |${NC}"
 echo -e "${tyblue}'------------------------------------------'${NC}"
 sleep 2
 clear
-wget https://raw.githubusercontent.com/DryanZ/multi/aio/backup/set-br.sh && chmod +x set-br.sh && ./set-br.sh
+wget https://raw.githubusercontent.com/arismaramar/multi/aio/backup/set-br.sh && chmod +x set-br.sh && ./set-br.sh
 #Install SSH Websocket
 echo -e "${tyblue}.------------------------------------------.${NC}"
 echo -e "${tyblue}|      PROCESS INSTALLED WEBSOCKET SSH     |${NC}"
 echo -e "${tyblue}'------------------------------------------'${NC}"
 sleep 2
 clear
-wget https://raw.githubusercontent.com/DryanZ/multi/aio/websocket/insshws.sh && chmod +x insshws.sh && ./insshws.sh
+wget https://raw.githubusercontent.com/arismaramar/multi/aio/websocket/insshws.sh && chmod +x insshws.sh && ./insshws.sh
 #Install SSH Websocket
 echo -e "${tyblue}.------------------------------------------.${NC}"
 echo -e "${tyblue}|          PROCESS INSTALLED OHP           |${NC}"
 echo -e "${tyblue}'------------------------------------------'${NC}"
 sleep 2
 clear
-wget https://raw.githubusercontent.com/DryanZ/multi/aio/openvpn/ohp.sh && chmod +x ohp.sh && ./ohp.sh
+wget https://raw.githubusercontent.com/arismaramar/multi/aio/openvpn/ohp.sh && chmod +x ohp.sh && ./ohp.sh
 #Download Extra Menu
 echo -e "${tyblue}.------------------------------------------.${NC}"
 echo -e "${tyblue}|           DOWNLOAD EXTRA MENU            |${NC}"
 echo -e "${tyblue}'------------------------------------------'${NC}"
 sleep 2
-wget https://raw.githubusercontent.com/DryanZ/multi/aio/menu/update.sh && chmod +x update.sh && ./update.sh
+wget https://raw.githubusercontent.com/arismaramar/multi/aio/menu/update.sh && chmod +x update.sh && ./update.sh
 clear
 cat> /root/.profile << END
 # ~/.profile: executed by Bourne-compatible login shells.
@@ -264,7 +264,7 @@ if [ ! -f "/etc/log-create-user.log" ]; then
 echo "Log All Account " > /etc/log-create-user.log
 fi
 history -c
-serverV=$( curl -sS https://raw.githubusercontent.com/DryanZ/multi/aio/version  )
+serverV=$( curl -sS https://raw.githubusercontent.com/arismaramar/multi/aio/version  )
 echo $serverV > /opt/.ver
 aureb=$(cat /home/re_otm)
 b=11
@@ -279,7 +279,7 @@ curl -sS ifconfig.me > /etc/myipvps
 echo " "
 echo "Installation has been completed!!"
 echo " "
-echo "=========================[SCRIPT PREMIUM]========================"
+echo "=========================[SCRIPT anggun-vpn]========================"
 echo ""  | tee -a log-install.txt
 echo "   >>> Service & Port"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
@@ -305,7 +305,7 @@ echo "   - Shadowsocks GRPC        : 443"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "    [INFORMASI XRAY]"  | tee -a log-install.txt
 echo "    ----------------" | tee -a log-install.txt
-echo "   - VLess TCP XTLS          : 443"  | tee -a log-install.txt
+echo "   - Xray Tcp XTLS           : 443"  | tee -a log-install.txt
 echo "   - Xray Vmess Ws Tls       : 443"  | tee -a log-install.txt
 echo "   - Xray Vless Ws Tls       : 443"  | tee -a log-install.txt
 echo "   - Xray Vmess Ws None Tls  : 80"  | tee -a log-install.txt
@@ -318,7 +318,7 @@ echo "   - Trojan GRPC             : 443"  | tee -a log-install.txt
 echo "   --------------------------------------------------------------" | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "   >>> Server Information & Other Features"  | tee -a log-install.txt
-echo "   - Timezone                : Asia/Kuala_Lumpur (GMT +8)"  | tee -a log-install.txt
+echo "   - Timezone                : Asia/Jakarta (GMT +8)"  | tee -a log-install.txt
 echo "   - Fail2Ban                : [ON]"  | tee -a log-install.txt
 echo "   - Dflate                  : [ON]"  | tee -a log-install.txt
 echo "   - IPtables                : [ON]"  | tee -a log-install.txt
@@ -334,7 +334,7 @@ echo "   - Admin Control" | tee -a log-install.txt
 echo "   - Backup & Restore Data" | tee -a log-install.txt
 echo "   - Full Orders For Various Services" | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
-echo "=========================[SCRIPT PREMIUM]========================"
+echo "=========================[SCRIPT anggun-vpn]========================"
 echo ""
 sleep 3
 echo -e "    ${tyblue}.------------------------------------------.${NC}"
