@@ -184,8 +184,8 @@ systemctl daemon-reload > /dev/null 2>&1
 systemctl enable xtls > /dev/null 2>&1
 systemctl restart xtls > /dev/null 2>&1
 
-wget -q -O /usr/bin/addxtls "https://raw.githubusercontent.com/DryanZ/multi/aio/xtls/add.sh" && chmod +x /usr/bin/addxtls
-wget -q -O /usr/bin/delxtls "https://raw.githubusercontent.com/DryanZ/multi/aio/xtls/del.sh" && chmod +x /usr/bin/delxtls
-wget -q -O /usr/bin/cekxtls "https://raw.githubusercontent.com/DryanZ/multi/aio/xtls/chk.sh" && chmod +x /usr/bin/cekxtls
-wget -q -O /usr/bin/renewxtls "https://raw.githubusercontent.com/DryanZ/multi/aio/xtls/rnw.sh" && chmod +x /usr/bin/renewxtls
-wget -q -O /usr/bin/portxtls "https://raw.githubusercontent.com/DryanZ/multi/aio/xtls/pxt.sh" && chmod +x /usr/bin/portxtls
+wget -q -O /usr/bin/addxtls "https://raw.githubusercontent.com/arismaramar/multi/aio/xtls/add.sh" && chmod +x /usr/bin/addxtls
+wget -q -O /usr/bin/delxtls "https://raw.githubusercontent.com/arismaramar/multi/aio/xtls/del.sh" && chmod +x /usr/bin/delxtls
+wget -q -O /usr/bin/cekxtls "https://raw.githubusercontent.com/arismaramar/multi/aio/xtls/chk.sh" && chmod +x /usr/bin/cekxtls
+wget -q -O /usr/bin/renewxtls "https://raw.githubusercontent.com/arismaramar/multi/aio/xtls/rnw.sh" && chmod +x /usr/bin/renewxtls
+wget -q -O /usr/bin/portxtls "https://raw.githubusercontent.com/arismaramar/multi/aio/xtls/pxt.sh" && chmod +x /usr/bin/portxtls
