@@ -21,7 +21,7 @@ Port_OHP='8787';
 
 #Installing ohp Server
 cd 
-wget -O /usr/local/bin/ohp "https://raw.githubusercontent.com/DryanZ/multi/aio/openvpn/ohp"
+wget -O /usr/local/bin/ohp "https://raw.githubusercontent.com/arismaramar/multi/aio/openvpn/ohp"
 chmod +x /usr/local/bin/ohp
 
 #Buat File OpenVPN TCP OHP
@@ -67,7 +67,7 @@ cd
 cat > /etc/systemd/system/ohp.service <<END
 [Unit]
 Description=Direct Squid Proxy For OpenVPN TCP By DIYVPN
-Documentation=https://t.me/NORULEZZx
+Documentation=https://t.me/arismaramar
 Wants=network.target
 After=network.target
 

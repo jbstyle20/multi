@@ -1,6 +1,6 @@
 [Unit]
-Description=Websocket-SSH By KaizenVPN
-Documentation=https://cvpn.ovh
+Description=Websocket-SSH By anggun-vpn
+Documentation=https://t.me/arismaramar
 After=network.target nss-lookup.target
 
 [Service]
