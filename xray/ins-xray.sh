@@ -4,7 +4,7 @@ biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 #########################
 
 BURIQ () {
-    curl -sS https://raw.githubusercontent.com/DryanZ/permission/aio/access > /root/tmp
+    curl -sS https://raw.githubusercontent.com/arismaramar/permission/aio/access > /root/tmp
     data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
     for user in "${data[@]}"
     do
@@ -22,7 +22,7 @@ BURIQ () {
 }
 
 MYIP=$(curl -sS ipv4.icanhazip.com)
-Name=$(curl -sS https://raw.githubusercontent.com/DryanZ/permission/aio/access | grep $MYIP | awk '{print $2}')
+Name=$(curl -sS https://raw.githubusercontent.com/arismaramar/permission/aio/access | grep $MYIP | awk '{print $2}')
 echo $Name > /usr/local/etc/.$Name.ini
 CekOne=$(cat /usr/local/etc/.$Name.ini)
 
@@ -39,7 +39,7 @@ fi
 
 PERMISSION () {
     MYIP=$(curl -sS ipv4.icanhazip.com)
-    IZIN=$(curl -sS https://raw.githubusercontent.com/DryanZ/permission/aio/access | awk '{print $4}' | grep $MYIP)
+    IZIN=$(curl -sS https://raw.githubusercontent.com/arismaramar/permission/aio/access | awk '{print $4}' | grep $MYIP)
     if [ "$MYIP" = "$IZIN" ]; then
     Bloman
     else
@@ -201,7 +201,7 @@ cat > /etc/xray/config.json << END
        "streamSettings":{
          "network": "ws",
             "wsSettings": {
-                "path": "/vmess"
+                "path": "/worryfree"
           }
         }
      },
@@ -419,7 +419,7 @@ WantedBy=multi-user.target
 EOF
 cat > /etc/systemd/system/runn.service <<EOF
 [Unit]
-Description=Mampus-Anjeng
+Description=lanjutan-aja
 After=network.target
 
 [Service]
@@ -546,7 +546,7 @@ sed -i '$ i}' /etc/nginx/conf.d/xray.conf
 
 sleep 1
 echo -e "[ ${green}INFO$NC ] Installing bbr.."
-wget -q -O /usr/bin/bbr "https://raw.githubusercontent.com/DryanZ/multi/aio/ssh/bbr.sh"
+wget -q -O /usr/bin/bbr "https://raw.githubusercontent.com/arismaramar/multi/aio/ssh/bbr.sh"
 chmod +x /usr/bin/bbr
 bbr >/dev/null 2>&1
 rm /usr/bin/bbr >/dev/null 2>&1
@@ -561,8 +561,8 @@ systemctl enable runn
 systemctl restart runn
 
 sleep 1
-wget -q -O /usr/bin/auto-set "https://raw.githubusercontent.com/DryanZ/multi/aio/xray/auto-set.sh" && chmod +x /usr/bin/auto-set 
-wget -q -O /usr/bin/crtxray "https://raw.githubusercontent.com/DryanZ/multi/aio/xray/crt.sh" && chmod +x /usr/bin/crtxray 
+wget -q -O /usr/bin/auto-set "https://raw.githubusercontent.com/arismaramar/multi/aio/xray/auto-set.sh" && chmod +x /usr/bin/auto-set 
+wget -q -O /usr/bin/crtxray "https://raw.githubusercontent.com/arismaramar/multi/aio/xray/crt.sh" && chmod +x /usr/bin/crtxray 
 sleep 1
 yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
 yellow "xray/Vmess"
