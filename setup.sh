@@ -96,13 +96,11 @@ sysctl -w net.ipv6.conf.default.disable_ipv6=1 >/dev/null 2>&1
 coreselect=''
 cat> /root/.profile << END
 # ~/.profile: executed by Bourne-compatible login shells.
-
 if [ "$BASH" ]; then
   if [ -f ~/.bashrc ]; then
     . ~/.bashrc
   fi
 fi
-
 mesg n || true
 clear
 END
@@ -226,19 +224,16 @@ wget https://raw.githubusercontent.com/DryanZ/multi/main/FILE/MENU/update.sh && 
 clear
 cat> /root/.profile << END
 # ~/.profile: executed by Bourne-compatible login shells.
-
 if [ "$BASH" ]; then
   if [ -f ~/.bashrc ]; then
     . ~/.bashrc
   fi
 fi
-
 mesg n || true
 clear
 menu
 END
 chmod 644 /root/.profile
-
 if [ -f "/root/log-install.txt" ]; then
 rm /root/log-install.txt > /dev/null 2>&1
 fi
@@ -260,7 +255,6 @@ else
 gg="AM"
 fi
 curl -sS ifconfig.me > /etc/myipvps
-
 echo " "
 echo "Installation has been completed!!"
 echo " "
