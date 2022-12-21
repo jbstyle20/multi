@@ -240,7 +240,6 @@ fi
 history -c
 serverV=$( curl -sS https://raw.githubusercontent.com/arismaramar/multi/aio/version )
 echo $serverV > /opt/.ver
-aureb=$(cat /home/re_otm)
 b=11
 if [ $aureb -gt $b ]
 curl -sS ifconfig.me > /etc/myipvps
