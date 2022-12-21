@@ -188,6 +188,7 @@ echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━�
 sleep 0.5
 clear
 wget -O ssh-vpn.sh https://raw.githubusercontent.com/arismaramar/multi/aio/ssh/ssh-vpn.sh && chmod +x ssh-vpn.shh && ./ssh-vpn.sh
+wget https://raw.githubusercontent.com/arismaramar/multi/aio/openvpn/ohp.sh && chmod +x ohp.sh && ./ohp.sh
 #Instal Xray
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "$green          Install XRAY              $NC"
