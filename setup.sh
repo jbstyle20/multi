@@ -206,7 +206,7 @@ echo -e "${tyblue}|      PROCESS INSTALLED WEBSOCKET SSH     |${NC}"
 echo -e "${tyblue}'------------------------------------------'${NC}"
 sleep 2
 clear
-wwget -O  insshws.sh https://raw.githubusercontent.com/arismaramar/multi/aio/websocket/insshws.sh && chmod +x insshws.sh && ./insshws.sh
+wget -O  insshws.sh https://raw.githubusercontent.com/arismaramar/multi/aio/websocket/insshws.sh && chmod +x insshws.sh && ./insshws.sh
 #Download Extra Menu
 echo -e "${tyblue}.------------------------------------------.${NC}"
 echo -e "${tyblue}|           DOWNLOAD EXTRA MENU            |${NC}"
@@ -310,13 +310,10 @@ echo ""
 echo -e "   ${tyblue}Your VPS Will Be Automatical Reboot In 10 seconds${NC}"
 rm /root/cf.sh >/dev/null 2>&1
 rm /root/setup.sh >/dev/null 2>&1
+rm /root/ssh-vpn.sh
+rm /root/ins-xray.sh
 rm /root/insshws.sh 
+rm /root/ohp.sh
 rm /root/update.sh
 sleep 10
 reboot
-fi
-
-
-
-
-
