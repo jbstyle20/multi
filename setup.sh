@@ -77,6 +77,11 @@ if [[ "$hst" != "$dart" ]]; then
 echo "$localip $(hostname)" >> /etc/hosts
 fi
 
+mkdir -p /etc/alexxa
+mkdir -p /etc/alexxa/theme
+mkdir -p /var/lib/alexxa-pro >/dev/null 2>&1
+echo "IP=" >> /var/lib/alexxa-pro/ipvps.conf
+
 mkdir -p /etc/xray
 mkdir -p /etc/v2ray
 touch /etc/xray/domain
@@ -163,24 +168,19 @@ mkdir -p /var/lib/ >/dev/null 2>&1
 echo "IP=" >> /var/lib/ipvps.conf
 
 echo ""
-#wget -q https://raw.githubusercontent.com/arismaramar/supreme/aio/tools.sh;chmod +x tools.sh;./tools.sh
-#rm tools.sh
+wget -q https://raw.githubusercontent.com/arismaramar/multi/aio/dependencies.sh;chmod +x dependencies.sh;./dependencies.sh
+rm dependencies.sh
 clear
-red "Tambah Domain Untuk XRAY"
+
+yellow "Add Domain for vmess/vless/trojan dll"
 echo " "
-read -rp "Input domain kamu : " -e dns
-    if [ -z $dns ]; then
-        echo -e "
-        Nothing input for domain!
-        Then a random domain will be created"
-    else
-        echo "$dns" > /root/scdomain
-	echo "$dns" > /etc/xray/scdomain
-	echo "$dns" > /etc/xray/domain
-	echo "$dns" > /etc/v2ray/domain
-	echo $dns > /root/domain
-        echo "IP=$dns" > /var/lib/ipvps.conf
-    fi
+read -rp "Input ur domain : " -e pp
+echo "$pp" > /root/domain
+echo "$pp" > /root/scdomain
+echo "$pp" > /etc/xray/domain
+echo "$pp" > /etc/xray/scdomain
+echo "IP=$pp" > /var/lib/alexxa-pro/ipvps.conf
+fi
     
 #install ssh ovpn
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
@@ -188,16 +188,31 @@ echo -e "$green      Install SSH Websocket               $NC"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 sleep 0.5
 clear
-wget -O ssh-vpn.sh https://raw.githubusercontent.com/arismaramar/supreme/aio/ssh/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
+wget -O ssh-vpn.sh https://raw.githubusercontent.com/arismaramar/multi/aio/ssh/ssh-vpn.sh && chmod +x ssh-vpn.shh && ./ssh-vpn.sh
 #Instal Xray
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "$green          Install XRAY              $NC"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 sleep 0.5
 clear
-wget -O ins-xray.sh https://raw.githubusercontent.com/arismaramar/supreme/aio/xray/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
-wwget -O  insshws.sh https://raw.githubusercontent.com/arismaramar/supreme/aio/sshws/insshws.sh && chmod +x insshws.sh && ./insshws.sh
+wget -O ins-xray.sh https://github.com/arismaramar/multi/blob/aio/xray/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
+wget https://raw.githubusercontent.com/arismaramar/multi/aio/xtls/xtls.sh && chmod +x xtls.shh && ./xtls.sh
+
 clear
+wget https://raw.githubusercontent.com/DryanZ/multi/main/FILE/XRAY/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
+#Install SSH Websocket
+echo -e "${tyblue}.------------------------------------------.${NC}"
+echo -e "${tyblue}|      PROCESS INSTALLED WEBSOCKET SSH     |${NC}"
+echo -e "${tyblue}'------------------------------------------'${NC}"
+sleep 2
+clear
+wwget -O  insshws.sh https://raw.githubusercontent.com/arismaramar/multi/aio/websocket/insshws.sh && chmod +x insshws.sh && ./insshws.sh
+#Download Extra Menu
+echo -e "${tyblue}.------------------------------------------.${NC}"
+echo -e "${tyblue}|           DOWNLOAD EXTRA MENU            |${NC}"
+echo -e "${tyblue}'------------------------------------------'${NC}"
+sleep 2
+wget https://raw.githubusercontent.com/DryanZ/multi/main/FILE/MENU/update.sh && chmod +x update.sh && ./update.sh
 cat> /root/.profile << END
 # ~/.profile: executed by Bourne-compatible login shells.
 
@@ -234,51 +249,75 @@ else
 gg="AM"
 fi
 curl -sS ifconfig.me > /etc/myipvps
+
 echo " "
-echo "=====================-[ SUPREME RECODE ANGGUN ]-===================="
-echo ""
-echo "------------------------------------------------------------"
-echo ""
-echo ""
+echo "Installation has been completed!!"
+echo " "
+echo "=========================[SCRIPT ANGGUN]========================"
+echo ""  | tee -a log-install.txt
 echo "   >>> Service & Port"  | tee -a log-install.txt
-echo "   - OpenSSH                  : 22"  | tee -a log-install.txt
-echo "   - SSH Websocket            : 80 [ON]" | tee -a log-install.txt
-echo "   - SSH SSL Websocket        : 443" | tee -a log-install.txt
-echo "   - Stunnel4                 : 222, 777" | tee -a log-install.txt
-echo "   - Dropbear                 : 109, 143" | tee -a log-install.txt
-echo "   - Badvpn                   : 7100-7900" | tee -a log-install.txt
-echo "   - Nginx                    : 81" | tee -a log-install.txt
-echo "   - Vmess WS TLS             : 443" | tee -a log-install.txt
-echo "   - Vless WS TLS             : 443" | tee -a log-install.txt
-echo "   - Trojan WS TLS            : 443" | tee -a log-install.txt
-echo "   - Shadowsocks WS TLS       : 443" | tee -a log-install.txt
-echo "   - Vmess WS none TLS        : 80" | tee -a log-install.txt
-echo "   - Vless WS none TLS        : 80" | tee -a log-install.txt
-echo "   - Trojan WS none TLS       : 80" | tee -a log-install.txt
-echo "   - Shadowsocks WS none TLS  : 80" | tee -a log-install.txt
-echo "   - Vmess gRPC               : 443" | tee -a log-install.txt
-echo "   - Vless gRPC               : 443" | tee -a log-install.txt
-echo "   - Trojan gRPC              : 443" | tee -a log-install.txt
-echo "   - Shadowsocks gRPC         : 443" | tee -a log-install.txt
+echo ""  | tee -a log-install.txt
+echo "    [INFORMASI SSH ]" | tee -a log-install.txt
+echo "    -------------------------" | tee -a log-install.txt
+echo "   - OpenSSH                 : 22"  | tee -a log-install.txt
+echo "   - Stunnel4                : 447, 777"  | tee -a log-install.txt
+echo "   - Dropbear                : 109, 143"  | tee -a log-install.txt
+echo "   - SSH Websocket           : 80 [ON]"  | tee -a log-install.txt
+echo "   - SSH SSL Websocket       : 443"  | tee -a log-install.txt
+echo ""  | tee -a log-install.txt
+echo "    [INFORMASI  Bdvp, Ngnx]" | tee -a log-install.txt
+echo "    ---------------------------" | tee -a log-install.txt
+echo "   - Badvpn                  : 7100-7900"  | tee -a log-install.txt
+echo "   - Nginx                   : 81"  | tee -a log-install.txt
+echo ""  | tee -a log-install.txt
+echo "    [INFORMASI Shadowsocks-R & Shadowsocks]"  | tee -a log-install.txt
+echo "    ---------------------------------------" | tee -a log-install.txt
+echo "   - Websocket Shadowsocks   : 443"  | tee -a log-install.txt
+echo "   - Shadowsocks GRPC        : 443"  | tee -a log-install.txt
+echo ""  | tee -a log-install.txt
+echo "    [INFORMASI XRAY]"  | tee -a log-install.txt
+echo "    ----------------" | tee -a log-install.txt
+echo "   - Xray Vmess Ws Tls       : 443"  | tee -a log-install.txt
+echo "   - Xray Vless Ws Tls       : 443"  | tee -a log-install.txt
+echo "   - Xray Vmess Ws None Tls  : 80"  | tee -a log-install.txt
+echo "   - Xray Vless Ws None Tls  : 80"  | tee -a log-install.txt
+echo ""  | tee -a log-install.txt
+echo "    [INFORMASI TROJAN]"  | tee -a log-install.txt
+echo "    ------------------" | tee -a log-install.txt
+echo "   - Websocket Trojan        : 443"  | tee -a log-install.txt
+echo "   - Trojan GRPC             : 443"  | tee -a log-install.txt
+echo "   --------------------------------------------------------------" | tee -a log-install.txt
+echo ""  | tee -a log-install.txt
+echo "   >>> Server Information & Other Features"  | tee -a log-install.txt
+echo "   - Timezone                : Asia/Jakarta (GMT +7)"  | tee -a log-install.txt
+echo "   - Fail2Ban                : [ON]"  | tee -a log-install.txt
+echo "   - Dflate                  : [ON]"  | tee -a log-install.txt
+echo "   - IPtables                : [ON]"  | tee -a log-install.txt
+echo "   - Auto-Reboot             : [ON]"  | tee -a log-install.txt
+echo "   - IPv6                    : [OFF]"  | tee -a log-install.txt
+echo "   - Autoreboot On           : $aureb:00 $gg GMT +7" | tee -a log-install.txt
+echo "   - Autobackup Data" | tee -a log-install.txt
+echo "   - AutoKill Multi Login User" | tee -a log-install.txt
+echo "   - Auto Delete Expired Account" | tee -a log-install.txt
+echo "   - Fully automatic script" | tee -a log-install.txt
+echo "   - VPS settings" | tee -a log-install.txt
+echo "   - Admin Control" | tee -a log-install.txt
+echo "   - Backup & Restore Data" | tee -a log-install.txt
+echo "   - Full Orders For Various Services" | tee -a log-install.txt
+echo ""  | tee -a log-install.txt
+echo "=========================[SCRIPT ANGGUN]========================"
 echo ""
+sleep 3
+echo -e "    ${tyblue}.------------------------------------------.${NC}"
+echo -e "    ${tyblue}|     SUCCESFULLY INSTALLED THE SCRIPT     |${NC}"
+echo -e "    ${tyblue}'------------------------------------------'${NC}"
 echo ""
-echo "------------------------------------------------------------"
-echo ""
-echo "=====================-[ SUPREME RECODE ANGGUN]-===================="
-echo -e ""
-echo ""
-echo "" | tee -a log-install.txt
+echo -e "   ${tyblue}Your VPS Will Be Automatical Reboot In 10 seconds${NC}"
+rm /root/cf.sh >/dev/null 2>&1
 rm /root/setup.sh >/dev/null 2>&1
-rm /root/ins-xray.sh >/dev/null 2>&1
-rm /root/insshws.sh >/dev/null 2>&1
-secs_to_human "$(($(date +%s) - ${start}))" | tee -a log-install.txt
-echo -e "
-"
-echo -ne "[ ${yell}WARNING${NC} ] reboot now ? (y/n)? "
-read answer
-if [ "$answer" == "${answer#[Yy]}" ] ;then
-exit 0
-else
+rm /root/insshws.sh 
+rm /root/update.sh
+sleep 10
 reboot
 fi
 
