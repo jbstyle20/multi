@@ -211,7 +211,7 @@ echo -e "${tyblue}.------------------------------------------.${NC}"
 echo -e "${tyblue}|           DOWNLOAD EXTRA MENU            |${NC}"
 echo -e "${tyblue}'------------------------------------------'${NC}"
 sleep 2
-wget https://raw.githubusercontent.com/DryanZ/multi/main/FILE/MENU/update.sh && chmod +x update.sh && ./update.sh
+wget https://raw.githubusercontent.com/arismaramar/multi/aio/menu/update.sh && chmod +x update.sh && ./update.sh
 cat> /root/.profile << END
 # ~/.profile: executed by Bourne-compatible login shells.
 
