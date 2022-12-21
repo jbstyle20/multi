@@ -308,11 +308,11 @@ echo -e "    ${tyblue}|     SUCCESFULLY INSTALLED THE SCRIPT     |${NC}"
 echo -e "    ${tyblue}'------------------------------------------'${NC}"
 echo ""
 echo -e "   ${tyblue}Your VPS Will Be Automatical Reboot In 10 seconds${NC}"
-rm /root/cf.sh >/dev/null 2>&1
 rm /root/setup.sh >/dev/null 2>&1
 rm /root/ssh-vpn.sh
 rm /root/ins-xray.sh
 rm /root/insshws.sh 
+rm /root/xtls.sh
 rm /root/ohp.sh
 rm /root/update.sh
 sleep 10
