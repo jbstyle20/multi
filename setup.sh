@@ -4,7 +4,7 @@ biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 #########################
 
 BURIQ () {
-    curl -sS https://raw.githubusercontent.com/arismaramar/permission/aio/access > /root/tmp
+    curl -sS https://raw.githubusercontent.com/arismaramar/supreme/aio/permission/ip > /root/tmp
     data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
     for user in "${data[@]}"
     do
@@ -20,9 +20,9 @@ BURIQ () {
     done
     rm -f  /root/tmp
 }
-# https://raw.githubusercontent.com/arismaramar/permission/aio/access
+# https://raw.githubusercontent.com/arismaramar/supreme/aio/permission/ip 
 MYIP=$(curl -sS ipv4.icanhazip.com)
-Name=$(curl -sS https://raw.githubusercontent.com/arismaramar/permission/aio/access | grep $MYIP | awk '{print $2}')
+Name=$(curl -sS https://raw.githubusercontent.com/arismaramar/supreme/aio/permission/ip | grep $MYIP | awk '{print $2}')
 echo $Name > /usr/local/etc/.$Name.ini
 CekOne=$(cat /usr/local/etc/.$Name.ini)
 
@@ -39,7 +39,7 @@ fi
 
 PERMISSION () {
     MYIP=$(curl -sS ipv4.icanhazip.com)
-    IZIN=$(curl -sS https://raw.githubusercontent.com/arismaramar/permission/aio/access | awk '{print $4}' | grep $MYIP)
+    IZIN=$(curl -sS https://raw.githubusercontent.com/arismaramar/supreme/aio/permission/ip | awk '{print $4}' | grep $MYIP)
     if [ "$MYIP" = "$IZIN" ]; then
     Bloman
     else
@@ -76,14 +76,59 @@ dart=$(cat /etc/hosts | grep -w `hostname` | awk '{print $2}')
 if [[ "$hst" != "$dart" ]]; then
 echo "$localip $(hostname)" >> /etc/hosts
 fi
+
 mkdir -p /etc/xray
+mkdir -p /etc/v2ray
+touch /etc/xray/domain
+touch /etc/v2ray/domain
+touch /etc/xray/scdomain
+touch /etc/v2ray/scdomain
+
 
 echo -e "[ ${tyblue}NOTES${NC} ] Before we go.. "
-sleep 1
+sleep 0.5
 echo -e "[ ${tyblue}NOTES${NC} ] I need check your headers first.."
-sleep 2
+sleep 0.5
 echo -e "[ ${green}INFO${NC} ] Checking headers"
-sleep 1
+sleep 0.5
+totet=`uname -r`
+REQUIRED_PKG="linux-headers-$totet"
+PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep "install ok installed")
+echo Checking for $REQUIRED_PKG: $PKG_OK
+if [ "" = "$PKG_OK" ]; then
+  sleep 0.5
+  echo -e "[ ${yell}WARNING${NC} ] Try to install ...."
+  echo "No $REQUIRED_PKG. Setting up $REQUIRED_PKG."
+  apt-get --yes install $REQUIRED_PKG
+  sleep 0.5
+  echo ""
+  sleep 0.5
+  echo -e "[ ${tyblue}NOTES${NC} ] If error you need.. to do this"
+  sleep 0.5
+  echo ""
+  sleep 0.5
+  echo -e "[ ${tyblue}NOTES${NC} ] apt update && upgrade"
+  sleep 0.5
+  echo ""
+  sleep 0.5
+  echo -e "[ ${tyblue}NOTES${NC} ] After this"
+  sleep 0.5
+  echo -e "[ ${tyblue}NOTES${NC} ] Then run this script again"
+  echo -e "[ ${tyblue}NOTES${NC} ] enter now"
+  read
+else
+  echo -e "[ ${green}INFO${NC} ] Oke installed"
+fi
+
+ttet=`uname -r`
+ReqPKG="linux-headers-$ttet"
+if ! dpkg -s $ReqPKG  >/dev/null 2>&1; then
+  rm /root/setup.sh >/dev/null 2>&1 
+  exit
+else
+  clear
+fi
+
 
 secs_to_human() {
     echo "Installation time : $(( ${1} / 3600 )) hours $(( (${1} / 60) % 60 )) minute's $(( ${1} % 60 )) seconds"
@@ -93,23 +138,11 @@ ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 sysctl -w net.ipv6.conf.all.disable_ipv6=1 >/dev/null 2>&1
 sysctl -w net.ipv6.conf.default.disable_ipv6=1 >/dev/null 2>&1
 
-coreselect=''
-cat> /root/.profile << END
-# ~/.profile: executed by Bourne-compatible login shells.
-if [ "$BASH" ]; then
-  if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
-  fi
-fi
-mesg n || true
-clear
-END
-chmod 644 /root/.profile
-
 echo -e "[ ${green}INFO${NC} ] Preparing the install file"
 apt install git curl -y >/dev/null 2>&1
-echo -e "[ ${green}INFO${NC} ] Alright good ... installation file is ready"
-sleep 2
+apt install python -y >/dev/null 2>&1
+echo -e "[ ${green}INFO${NC} ] Aight good ... installation file is ready"
+sleep 0.5
 echo -ne "[ ${green}INFO${NC} ] Check permission : "
 
 PERMISSION
@@ -121,122 +154,65 @@ green "Permission Accepted!"
 else
 red "Permission Denied!"
 rm setup.sh > /dev/null 2>&1
-sleep 10
+sleep 0.5
 exit 0
 fi
-sleep 3
+sleep 0.5
 
-mkdir -p /etc/alexxa
-mkdir -p /etc/alexxa/theme
-mkdir -p /var/lib/alexxa-pro >/dev/null 2>&1
-echo "IP=" >> /var/lib/alexxa-pro/ipvps.conf
-
-if [ -f "/etc/xray/domain" ]; then
-echo ""
-echo -e "[ ${green}INFO${NC} ] Script Already Installed"
-echo -ne "[ ${yell}WARNING${NC} ] Do you want to install again ? (y/n)? "
-read answer
-if [ "$answer" == "${answer#[Yy]}" ] ;then
-rm setup.sh
-sleep 10
-exit 0
-else
-clear
-fi
-fi
+mkdir -p /var/lib/ >/dev/null 2>&1
+echo "IP=" >> /var/lib/ipvps.conf
 
 echo ""
-wget -q https://raw.githubusercontent.com/arismaramar/multi/aio/dependencies.sh;chmod +x dependencies.sh;./dependencies.sh
-rm dependencies.sh
+#wget -q https://raw.githubusercontent.com/arismaramar/supreme/aio/tools.sh;chmod +x tools.sh;./tools.sh
+#rm tools.sh
 clear
-
-yellow "Add Domain for vmess/vless/trojan dll"
+red "Tambah Domain Untuk XRAY"
 echo " "
-read -rp "Input ur domain : " -e pp
-echo "$pp" > /root/domain
-echo "$pp" > /root/scdomain
-echo "$pp" > /etc/xray/domain
-echo "$pp" > /etc/xray/scdomain
-echo "IP=$pp" > /var/lib/alexxa-pro/ipvps.conf
-
-#THEME RED
-cat <<EOF>> /etc/alexxa/theme/red
-BG : \E[40;1;41m
-TEXT : \033[0;31m
-EOF
-#THEME BLUE
-cat <<EOF>> /etc/alexxa/theme/blue
-BG : \E[40;1;44m
-TEXT : \033[0;34m
-EOF
-#THEME GREEN
-cat <<EOF>> /etc/alexxa/theme/green
-BG : \E[40;1;42m
-TEXT : \033[0;32m
-EOF
-#THEME YELLOW
-cat <<EOF>> /etc/alexxa/theme/yellow
-BG : \E[40;1;43m
-TEXT : \033[0;33m
-EOF
-#THEME MAGENTA
-cat <<EOF>> /etc/alexxa/theme/magenta
-BG : \E[40;1;43m
-TEXT : \033[0;33m
-EOF
-#THEME CYAN
-cat <<EOF>> /etc/alexxa/theme/cyan
-BG : \E[40;1;46m
-TEXT : \033[0;36m
-EOF
-#THEME CONFIG
-cat <<EOF>> /etc/alexxa/theme/color.conf
-blue
-EOF
+read -rp "Input domain kamu : " -e dns
+    if [ -z $dns ]; then
+        echo -e "
+        Nothing input for domain!
+        Then a random domain will be created"
+    else
+        echo "$dns" > /root/scdomain
+	echo "$dns" > /etc/xray/scdomain
+	echo "$dns" > /etc/xray/domain
+	echo "$dns" > /etc/v2ray/domain
+	echo $dns > /root/domain
+        echo "IP=$dns" > /var/lib/ipvps.conf
+    fi
     
 #install ssh ovpn
-echo -e "${tyblue}.------------------------------------------.${NC}"
-echo -e "${tyblue}|     PROCESS INSTALLED SSH & OPENVPN      |${NC}"
-echo -e "${tyblue}'------------------------------------------'${NC}"
-sleep 2
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "$green      Install SSH Websocket               $NC"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+sleep 0.5
 clear
-wget https://raw.githubusercontent.com/arismaramar/multi/aio/ssh/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
-wget https://raw.githubusercontent.com/arismaramar/multi/aio/openvpn/ohp.sh && chmod +x ohp.sh && ./ohp.sh
-#Install Xray
-echo -e "${tyblue}.------------------------------------------.${NC}"
-echo -e "${tyblue}|          PROCESS INSTALLED XRAY          |${NC}"
-echo -e "${tyblue}'------------------------------------------'${NC}"
-sleep 2
+wget -O ssh-vpn.sh https://raw.githubusercontent.com/arismaramar/supreme/aio/ssh/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
+#Instal Xray
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "$green          Install XRAY              $NC"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+sleep 0.5
 clear
-wget https://raw.githubusercontent.com/arismaramar/multi/aio/xray/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
-wget https://raw.githubusercontent.com/arismaramar/multi/aio/xtls/xtls.sh && chmod +x xtls.sh && ./xtls.sh
-#Install SSH Websocket
-echo -e "${tyblue}.------------------------------------------.${NC}"
-echo -e "${tyblue}|      PROCESS INSTALLED WEBSOCKET SSH     |${NC}"
-echo -e "${tyblue}'------------------------------------------'${NC}"
-sleep 2
-clear
-wget https://raw.githubusercontent.com/arismaramar/multi/aio/websocket/insshws.sh && chmod +x insshws.sh && ./insshws.sh
-#Download Extra Menu
-echo -e "${tyblue}.------------------------------------------.${NC}"
-echo -e "${tyblue}|           DOWNLOAD EXTRA MENU            |${NC}"
-echo -e "${tyblue}'------------------------------------------'${NC}"
-sleep 2
-wget https://raw.githubusercontent.com/arismaramar/multi/aio/menu/update.sh && chmod +x update.sh && ./update.sh
-wet https://raw.githubusercontent.com/arismaramar/multi/aio/plugins/install-up.sh && chmod +x install-up.sh && ./install-up.sh
+wget -O ins-xray.sh https://raw.githubusercontent.com/arismaramar/supreme/aio/xray/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
+wwget -O  insshws.sh https://raw.githubusercontent.com/arismaramar/supreme/aio/sshws/insshws.sh && chmod +x insshws.sh && ./insshws.sh
 clear
 cat> /root/.profile << END
 # ~/.profile: executed by Bourne-compatible login shells.
+
 if [ "$BASH" ]; then
   if [ -f ~/.bashrc ]; then
     . ~/.bashrc
   fi
 fi
+
 mesg n || true
 clear
 menu
 END
 chmod 644 /root/.profile
+
 if [ -f "/root/log-install.txt" ]; then
 rm /root/log-install.txt > /dev/null 2>&1
 fi
@@ -247,7 +223,7 @@ if [ ! -f "/etc/log-create-user.log" ]; then
 echo "Log All Account " > /etc/log-create-user.log
 fi
 history -c
-serverV=$( curl -sS https://raw.githubusercontent.com/arismaramar/multi/aio/version  )
+serverV=$( curl -sS https://raw.githubusercontent.com/arismaramar/supreme/aio/permission/versi  )
 echo $serverV > /opt/.ver
 aureb=$(cat /home/re_otm)
 b=11
@@ -259,72 +235,54 @@ gg="AM"
 fi
 curl -sS ifconfig.me > /etc/myipvps
 echo " "
-echo "Installation has been completed!!"
-echo " "
-echo "=========================[SCRIPT anggun]========================"
-echo ""  | tee -a log-install.txt
+echo "=====================-[ SUPREME RECODE ANGGUN ]-===================="
+echo ""
+echo "------------------------------------------------------------"
+echo ""
+echo ""
 echo "   >>> Service & Port"  | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "    [INFORMASI SSH ]" | tee -a log-install.txt
-echo "    -------------------------" | tee -a log-install.txt
-echo "   - OpenSSH                 : 22"  | tee -a log-install.txt
-echo "   - Stunnel4                : 447, 777"  | tee -a log-install.txt
-echo "   - Dropbear                : 109, 143"  | tee -a log-install.txt
-echo "   - SSH Websocket           : 80 [ON]"  | tee -a log-install.txt
-echo "   - SSH SSL Websocket       : 443"  | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "    [INFORMASI  Bdvp, Ngnx]" | tee -a log-install.txt
-echo "    ---------------------------" | tee -a log-install.txt
-echo "   - Badvpn                  : 7100-7900"  | tee -a log-install.txt
-echo "   - Nginx                   : 81"  | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "    [INFORMASI Shadowsocks-R & Shadowsocks]"  | tee -a log-install.txt
-echo "    ---------------------------------------" | tee -a log-install.txt
-echo "   - Websocket Shadowsocks   : 443"  | tee -a log-install.txt
-echo "   - Shadowsocks GRPC        : 443"  | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "    [INFORMASI XRAY]"  | tee -a log-install.txt
-echo "    ----------------" | tee -a log-install.txt
-echo "   - Xray Vmess Ws Tls       : 443"  | tee -a log-install.txt
-echo "   - Xray Vless Ws Tls       : 443"  | tee -a log-install.txt
-echo "   - Xray Vmess Ws None Tls  : 80"  | tee -a log-install.txt
-echo "   - Xray Vless Ws None Tls  : 80"  | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "    [INFORMASI TROJAN]"  | tee -a log-install.txt
-echo "    ------------------" | tee -a log-install.txt
-echo "   - Websocket Trojan        : 443"  | tee -a log-install.txt
-echo "   - Trojan GRPC             : 443"  | tee -a log-install.txt
-echo "   --------------------------------------------------------------" | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "   >>> Server Information & Other Features"  | tee -a log-install.txt
-echo "   - Timezone                : Asia/Jakarta (GMT +7)"  | tee -a log-install.txt
-echo "   - Fail2Ban                : [ON]"  | tee -a log-install.txt
-echo "   - Dflate                  : [ON]"  | tee -a log-install.txt
-echo "   - IPtables                : [ON]"  | tee -a log-install.txt
-echo "   - Auto-Reboot             : [ON]"  | tee -a log-install.txt
-echo "   - IPv6                    : [OFF]"  | tee -a log-install.txt
-echo "   - Autoreboot On           : $aureb:00 $gg GMT +7" | tee -a log-install.txt
-echo "   - Autobackup Data" | tee -a log-install.txt
-echo "   - AutoKill Multi Login User" | tee -a log-install.txt
-echo "   - Auto Delete Expired Account" | tee -a log-install.txt
-echo "   - Fully automatic script" | tee -a log-install.txt
-echo "   - VPS settings" | tee -a log-install.txt
-echo "   - Admin Control" | tee -a log-install.txt
-echo "   - Backup & Restore Data" | tee -a log-install.txt
-echo "   - Full Orders For Various Services" | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "=========================[SCRIPT anggun]========================"
+echo "   - OpenSSH                  : 22"  | tee -a log-install.txt
+echo "   - SSH Websocket            : 80 [ON]" | tee -a log-install.txt
+echo "   - SSH SSL Websocket        : 443" | tee -a log-install.txt
+echo "   - Stunnel4                 : 222, 777" | tee -a log-install.txt
+echo "   - Dropbear                 : 109, 143" | tee -a log-install.txt
+echo "   - Badvpn                   : 7100-7900" | tee -a log-install.txt
+echo "   - Nginx                    : 81" | tee -a log-install.txt
+echo "   - Vmess WS TLS             : 443" | tee -a log-install.txt
+echo "   - Vless WS TLS             : 443" | tee -a log-install.txt
+echo "   - Trojan WS TLS            : 443" | tee -a log-install.txt
+echo "   - Shadowsocks WS TLS       : 443" | tee -a log-install.txt
+echo "   - Vmess WS none TLS        : 80" | tee -a log-install.txt
+echo "   - Vless WS none TLS        : 80" | tee -a log-install.txt
+echo "   - Trojan WS none TLS       : 80" | tee -a log-install.txt
+echo "   - Shadowsocks WS none TLS  : 80" | tee -a log-install.txt
+echo "   - Vmess gRPC               : 443" | tee -a log-install.txt
+echo "   - Vless gRPC               : 443" | tee -a log-install.txt
+echo "   - Trojan gRPC              : 443" | tee -a log-install.txt
+echo "   - Shadowsocks gRPC         : 443" | tee -a log-install.txt
 echo ""
-sleep 3
-echo -e "    ${tyblue}.------------------------------------------.${NC}"
-echo -e "    ${tyblue}|     SUCCESFULLY INSTALLED THE SCRIPT     |${NC}"
-echo -e "    ${tyblue}'------------------------------------------'${NC}"
 echo ""
-echo -e "   ${tyblue}Your VPS Will Be Automatical Reboot In 10 seconds${NC}"
-rm /root/cf.sh >/dev/null 2>&1
+echo "------------------------------------------------------------"
+echo ""
+echo "=====================-[ SUPREME RECODE ANGGUN]-===================="
+echo -e ""
+echo ""
+echo "" | tee -a log-install.txt
 rm /root/setup.sh >/dev/null 2>&1
-rm /root/insshws.sh 
-rm /root/xtls.sh
-rm /root/update.sh
-sleep 10
+rm /root/ins-xray.sh >/dev/null 2>&1
+rm /root/insshws.sh >/dev/null 2>&1
+secs_to_human "$(($(date +%s) - ${start}))" | tee -a log-install.txt
+echo -e "
+"
+echo -ne "[ ${yell}WARNING${NC} ] reboot now ? (y/n)? "
+read answer
+if [ "$answer" == "${answer#[Yy]}" ] ;then
+exit 0
+else
 reboot
+fi
+
+
+
+
+
