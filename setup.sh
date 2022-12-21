@@ -180,8 +180,7 @@ echo "$pp" > /root/scdomain
 echo "$pp" > /etc/xray/domain
 echo "$pp" > /etc/xray/scdomain
 echo "IP=$pp" > /var/lib/alexxa-pro/ipvps.conf
-fi
-    
+   
 #install ssh ovpn
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "$green      Install SSH Websocket               $NC"
@@ -238,16 +237,11 @@ if [ ! -f "/etc/log-create-user.log" ]; then
 echo "Log All Account " > /etc/log-create-user.log
 fi
 history -c
-serverV=$( curl -sS https://raw.githubusercontent.com/arismaramar/supreme/aio/permission/versi  )
+serverV=$( curl -sS https://raw.githubusercontent.com/arismaramar/multi/aio/version )
 echo $serverV > /opt/.ver
 aureb=$(cat /home/re_otm)
 b=11
 if [ $aureb -gt $b ]
-then
-gg="PM"
-else
-gg="AM"
-fi
 curl -sS ifconfig.me > /etc/myipvps
 
 echo " "
