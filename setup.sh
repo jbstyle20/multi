@@ -4,7 +4,7 @@ biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 #########################
 
 BURIQ () {
-    curl -sS https://raw.githubusercontent.com/DryanZ/permission/main/access > /root/tmp
+    curl -sS https://raw.githubusercontent.com/arismaramar/permission/aio/access > /root/tmp
     data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
     for user in "${data[@]}"
     do
@@ -20,9 +20,9 @@ BURIQ () {
     done
     rm -f  /root/tmp
 }
-# https://raw.githubusercontent.com/DryanZ/permission/main/access 
+# https://raw.githubusercontent.com/arismaramar/permission/aio/access
 MYIP=$(curl -sS ipv4.icanhazip.com)
-Name=$(curl -sS https://raw.githubusercontent.com/DryanZ/permission/main/access | grep $MYIP | awk '{print $2}')
+Name=$(curl -sS https://raw.githubusercontent.com/arismaramar/permission/aio/access | grep $MYIP | awk '{print $2}')
 echo $Name > /usr/local/etc/.$Name.ini
 CekOne=$(cat /usr/local/etc/.$Name.ini)
 
@@ -39,7 +39,7 @@ fi
 
 PERMISSION () {
     MYIP=$(curl -sS ipv4.icanhazip.com)
-    IZIN=$(curl -sS https://raw.githubusercontent.com/DryanZ/permission/main/access | awk '{print $4}' | grep $MYIP)
+    IZIN=$(curl -sS https://raw.githubusercontent.com/arismaramar/permission/aio/access | awk '{print $4}' | grep $MYIP)
     if [ "$MYIP" = "$IZIN" ]; then
     Bloman
     else
@@ -146,7 +146,7 @@ fi
 fi
 
 echo ""
-wget -q https://raw.githubusercontent.com/DryanZ/multi/main/FILE/dependencies.sh;chmod +x dependencies.sh;./dependencies.sh
+wget -q https://raw.githubusercontent.com/arismaramar/multi/aio/dependencies.sh;chmod +x dependencies.sh;./dependencies.sh
 rm dependencies.sh
 clear
 
@@ -200,27 +200,30 @@ echo -e "${tyblue}|     PROCESS INSTALLED SSH & OPENVPN      |${NC}"
 echo -e "${tyblue}'------------------------------------------'${NC}"
 sleep 2
 clear
-wget https://raw.githubusercontent.com/DryanZ/multi/main/FILE/SSH/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
+wget https://raw.githubusercontent.com/arismaramar/multi/aio/ssh/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
+wget https://raw.githubusercontent.com/arismaramar/multi/aio/openvpn/ohp.sh && chmod +x ohp.sh && ./ohp.sh
 #Install Xray
 echo -e "${tyblue}.------------------------------------------.${NC}"
 echo -e "${tyblue}|          PROCESS INSTALLED XRAY          |${NC}"
 echo -e "${tyblue}'------------------------------------------'${NC}"
 sleep 2
 clear
-wget https://raw.githubusercontent.com/DryanZ/multi/main/FILE/XRAY/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
+wget https://raw.githubusercontent.com/arismaramar/multi/aio/xray/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
+wget https://raw.githubusercontent.com/arismaramar/multi/aio/xtls/xtls.sh && chmod +x xtls.sh && ./xtls.sh
 #Install SSH Websocket
 echo -e "${tyblue}.------------------------------------------.${NC}"
 echo -e "${tyblue}|      PROCESS INSTALLED WEBSOCKET SSH     |${NC}"
 echo -e "${tyblue}'------------------------------------------'${NC}"
 sleep 2
 clear
-wget https://raw.githubusercontent.com/DryanZ/multi/main/FILE/WEBSOCKET/insshws.sh && chmod +x insshws.sh && ./insshws.sh
+wget https://raw.githubusercontent.com/arismaramar/multi/aio/websocket/insshws.sh && chmod +x insshws.sh && ./insshws.sh
 #Download Extra Menu
 echo -e "${tyblue}.------------------------------------------.${NC}"
 echo -e "${tyblue}|           DOWNLOAD EXTRA MENU            |${NC}"
 echo -e "${tyblue}'------------------------------------------'${NC}"
 sleep 2
-wget https://raw.githubusercontent.com/DryanZ/multi/main/FILE/MENU/update.sh && chmod +x update.sh && ./update.sh
+wget https://raw.githubusercontent.com/arismaramar/multi/aio/menu/update.sh && chmod +x update.sh && ./update.sh
+wet https://raw.githubusercontent.com/arismaramar/multi/aio/plugins/install-up.sh && chmod +x install-up.sh && ./install-up.sh
 clear
 cat> /root/.profile << END
 # ~/.profile: executed by Bourne-compatible login shells.
@@ -244,7 +247,7 @@ if [ ! -f "/etc/log-create-user.log" ]; then
 echo "Log All Account " > /etc/log-create-user.log
 fi
 history -c
-serverV=$( curl -sS https://raw.githubusercontent.com/DryanZ/multi/main/FILE/version  )
+serverV=$( curl -sS https://raw.githubusercontent.com/arismaramar/multi/aio/version  )
 echo $serverV > /opt/.ver
 aureb=$(cat /home/re_otm)
 b=11
@@ -258,7 +261,7 @@ curl -sS ifconfig.me > /etc/myipvps
 echo " "
 echo "Installation has been completed!!"
 echo " "
-echo "=========================[SCRIPT PREMIUM]========================"
+echo "=========================[SCRIPT anggun]========================"
 echo ""  | tee -a log-install.txt
 echo "   >>> Service & Port"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
@@ -310,7 +313,7 @@ echo "   - Admin Control" | tee -a log-install.txt
 echo "   - Backup & Restore Data" | tee -a log-install.txt
 echo "   - Full Orders For Various Services" | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
-echo "=========================[SCRIPT PREMIUM]========================"
+echo "=========================[SCRIPT anggun]========================"
 echo ""
 sleep 3
 echo -e "    ${tyblue}.------------------------------------------.${NC}"
@@ -321,6 +324,7 @@ echo -e "   ${tyblue}Your VPS Will Be Automatical Reboot In 10 seconds${NC}"
 rm /root/cf.sh >/dev/null 2>&1
 rm /root/setup.sh >/dev/null 2>&1
 rm /root/insshws.sh 
+rm /root/xtls.sh
 rm /root/update.sh
 sleep 10
 reboot
