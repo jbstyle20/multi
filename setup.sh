@@ -199,7 +199,6 @@ wget -O ins-xray.sh https://github.com/arismaramar/multi/blob/aio/xray/ins-xray.
 wget https://raw.githubusercontent.com/arismaramar/multi/aio/xtls/xtls.sh && chmod +x xtls.shh && ./xtls.sh
 
 clear
-wget https://raw.githubusercontent.com/DryanZ/multi/main/FILE/XRAY/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
 #Install SSH Websocket
 echo -e "${tyblue}.------------------------------------------.${NC}"
 echo -e "${tyblue}|      PROCESS INSTALLED WEBSOCKET SSH     |${NC}"
